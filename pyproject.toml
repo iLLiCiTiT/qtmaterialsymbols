@@ -1,0 +1,24 @@
+[project]
+name = "qtmaterialsymbols"
+version = "1.0.0"
+description = "Material Symbols in PySide and PyQt applications"
+keywords = ["PySide", "PyQt", "Qt", "Material Symbols", "Icons"]
+authors = [
+  {name = "Jakub Trllo", email = "jakub.trllo@gmail.com"},
+]
+readme = {file = "README.md", content-type = "text/markdown"}
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+requires-python = ">=3.7"
+dependencies = [
+    "qtpy"
+]
+
+[project.urls]
+Repository = "https://github.com/iLLiCiTiT/qtmaterialsymbols"
+Issues = "https://github.com/iLLiCiTiT/qtmaterialsymbols/issues"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
