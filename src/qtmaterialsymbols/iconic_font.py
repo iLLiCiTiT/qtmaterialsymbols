@@ -51,12 +51,6 @@ class CharIconPainter:
 
         painter.setPen(QtGui.QColor(color))
 
-        # A 16 pixel-high icon yields a font size of 14, which is pixel perfect
-        # for font-awesome. 16 * 0.875 = 14
-        # The reason why the glyph size is smaller than the icon size is to
-        # account for font bearing.
-        # draw_size = round(0.875 * rect.height() * options.scale_factor)
-
         draw_size = round(rect.height() * options.scale_factor)
 
         painter.setFont(iconic.get_font(draw_size))
@@ -98,7 +92,7 @@ class CharIconEngine(QtGui.QIconEngine):
         painter: QtGui.QPainter,
         options: IconOptions
     ):
-        super(CharIconEngine, self).__init__()
+        super().__init__()
         self._iconic = iconic
         self._painter = painter
         self._options = options
