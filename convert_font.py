@@ -20,7 +20,7 @@ def convert_variable_font(
 
     dst_dir = CURRENT_DIR / "src" / "qtmaterialsymbols" / "resources"
     static_file = dst_dir / f"{base_name}.ttf"
-    static_file_filled = dst_dir / f"{base_name}-filled.ttf"
+    static_file_filled = dst_dir / f"{base_name}Filled.ttf"
     json_file = dst_dir / f"{base_name}.json"
 
     print(f"- Converting variable font")
@@ -34,16 +34,25 @@ def convert_variable_font(
 
     # Change family name of filled font
     new_base_name = f"{base_name}Filled"
+    family_base_name = "Material Symbols Outlined"
+    new_family_base_name = f"{family_base_name} Filled"
+
     for record in static_font_filled["name"].names:
-        if base_name in record.toUnicode():
-            new_name = record.toUnicode().replace(base_name, new_base_name)
-            static_font_filled["name"].setName(
-                new_name,
-                record.nameID,
-                record.platformID,
-                record.platEncID,
-                record.langID,
-            )
+        name_str = record.toUnicode()
+        if family_base_name in name_str:
+            new_name = name_str.replace(family_base_name, new_family_base_name)
+        elif base_name in name_str:
+            new_name = name_str.replace(base_name, new_base_name)
+        else:
+            continue
+
+        static_font_filled["name"].setName(
+            new_name,
+            record.nameID,
+            record.platformID,
+            record.platEncID,
+            record.langID,
+        )
 
     static_font.save(static_file)
     static_font_filled.save(static_file_filled)
