@@ -53,7 +53,18 @@ class CharIconPainter:
 
         draw_size = round(rect.height() * options.scale_factor)
 
-        painter.setFont(iconic.get_font(draw_size))
+        font = iconic.get_font(draw_size)
+        if hasattr(QtGui.QFont.Tag, "fromString"):
+            for tag_name, value in (
+                ("FILL", options.get_fill_for_state(state, mode)),
+                ("GRAD", options.get_grade_for_state(state, mode)),
+                ("wght", options.get_weight_for_state(state, mode)),
+                ("opsz", options.get_optical_size_for_state(state, mode)),
+            ):
+                tag = QtGui.QFont.Tag.fromString(tag_name)
+                font.setVariableAxis(tag, value)
+
+        painter.setFont(font)
         if options.offset is not None:
             rect = QtCore.QRect(rect)
             rect.translate(
