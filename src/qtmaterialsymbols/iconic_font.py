@@ -54,6 +54,7 @@ class CharIconPainter:
         draw_size = round(rect.height() * options.scale_factor)
 
         font = iconic.get_font(draw_size)
+        # Tags are available since PySide 6.9.x
         if hasattr(QtGui.QFont.Tag, "fromString"):
             for tag_name, value in (
                 ("FILL", options.get_fill_for_state(state, mode)),
