@@ -35,7 +35,7 @@ def convert_variable_font(
     # Change family name of filled font
     new_base_name = f"{base_name}Filled"
     family_base_name = "Material Symbols Outlined"
-    new_family_base_name = f"{family_base_name} Filled"
+    new_family_base_name = "Material Symbols OutlinedFILL"
 
     for record in static_font_filled["name"].names:
         name_str = record.toUnicode()
