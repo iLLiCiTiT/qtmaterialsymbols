@@ -25,13 +25,20 @@ def convert_variable_font(
     json_file = dst_dir / f"{base_name}.json"
 
     print(f"- Converting variable font")
-    var_font = TTFont(font_path)
-    static_font = instantiateVariableFont(
-        var_font, {"wght": weight}
-    )
-    static_font_filled = instantiateVariableFont(
-        var_font, {"wght": weight, "FILL": 1.0}
-    )
+
+    def _instantiate(axes):
+        var_font = TTFont(font_path)
+        static_font = instantiateVariableFont(
+            var_font,
+            axes,
+            static=True,
+        )
+        if "STAT" in static_font:
+            del static_font["STAT"]
+        return static_font
+
+    static_font = _instantiate({"wght": weight})
+    static_font_filled = _instantiate({"wght": weight, "FILL": 1.0})
 
     # Change family name of filled font
     family_base_name = "Material Symbols Outlined"
