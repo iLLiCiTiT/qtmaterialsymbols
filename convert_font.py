@@ -12,12 +12,13 @@ CURRENT_DIR = Path(__file__).parent
 def convert_variable_font(
     font_path: str,
     weight: int,
-    base_name="MaterialSymbolsOutlined",
 ):
     print(f"--- Converting font ---")
     font_path = Path(font_path)
     codepoints_path = font_path.parent / font_path.name.replace(".ttf", ".codepoints")
 
+    base_name = "MaterialSymbolsOutlined"
+    new_base_name = "MaterialSymbolsOutlFILL"
     dst_dir = CURRENT_DIR / "src" / "qtmaterialsymbols" / "resources"
     static_file = dst_dir / f"{base_name}.ttf"
     static_file_filled = dst_dir / f"{base_name}Filled.ttf"
@@ -33,7 +34,6 @@ def convert_variable_font(
     )
 
     # Change family name of filled font
-    new_base_name = f"{base_name}Filled"
     family_base_name = "Material Symbols Outlined"
     new_family_base_name = "Material Symbols OutlFILL"
 
